@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Danica — Chocolate & Art Show Dallas</title>
+<meta name="description" content="Meet Danica, featured artist at Chocolate & Art Show Dallas. View her bio and artwork collection.">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="../assets/images/choco-logo.png">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Danica — Chocolate & Art Show Dallas">
+<meta property="og:description" content="Meet Danica, featured artist at Chocolate & Art Show Dallas.">
+<meta property="og:image" content="/assets/artists/danica/thumb.jpg">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://chocolateandartshow.com/artists/danica.html">
+
+<style>
+  :root{--bg:#0b0b0d;--fg:#ececec;--muted:#b6beca}
+  html,body{height:100%}
+  body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.55 Inter,system-ui,Segoe UI,Roboto,Arial}
+  .wrap{max-width:1100px;margin:0 auto;padding:26px}
+  a{color:#a0c2ff}
+
+  /* Header with blob image (reusing defs) */
+  header{display:grid;grid-template-columns: 340px 1fr;gap:20px;align-items:end}
+  .portrait{background:#15161a;border:1px solid #ffffff1a;border-radius:16px;overflow:hidden;aspect-ratio: 16/10;clip-path:url(#blob-2)}
+  .portrait img{width:100%;height:100%;object-fit:cover;display:block}
+  h1{margin:0 0 .2rem 0;font-size:clamp(1.8rem,4.5vw,3rem);font-weight:800}
+  .meta{color:var(--muted);font-weight:600}
+
+  /* Bio */
+  .bio{margin:18px 0 28px;max-width:70ch}
+
+  /* Carousel (scroll-snap) */
+  .carousel{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+  .slide{flex:0 0 82%;scroll-snap-align:center;background:#111319;border:1px solid #ffffff1a;border-radius:14px;overflow:hidden}
+  .slide img{display:block;width:100%;height:auto}
+  figcaption{padding:.65rem .8rem;font-size:.95rem;color:var(--muted)}
+
+  /* Nav buttons (progressive enhancement) */
+  .nav{display:flex;gap:10px;margin:10px 0}
+  .nav button{appearance:none;background:#ffffff14;border:1px solid #ffffff33;color:#fff;border-radius:10px;padding:.6rem .9rem;font-weight:700;cursor:pointer}
+  .nav button:focus-visible{outline:3px solid #fff3}
+  .nav button:hover{background:#ffffff22}
+
+  /* Back link */
+  .back{display:inline-block;margin:20px 0 0;font-weight:700;color:#a0c2ff;text-decoration:none}
+  .back:hover{text-decoration:underline}
+
+  /* Accessibility */
+  .visually-hidden{position:absolute !important;clip:rect(0 0 0 0);clip-path:inset(50%);width:1px;height:1px;overflow:hidden;white-space:nowrap}
+
+  @media (max-width:760px){header{grid-template-columns:1fr}}
+  @supports not (clip-path: url(#blob-2)){.portrait{clip-path:none;border-radius:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <!-- SVG defs (can be copied once per site into a shared partial) -->
+  <svg class="visually-hidden" aria-hidden="true" width="0" height="0" focusable="false">
+    <defs>
+      <clipPath id="blob-2" clipPathUnits="objectBoundingBox">
+        <path d="M0.03,0.38 C0.09,0.16 0.23,0.06 0.45,0.06 L0.86,0.06 C0.96,0.06 1.00,0.18 0.98,0.34 C0.96,0.50 0.87,0.69 0.68,0.73 C0.50,0.77 0.38,0.68 0.24,0.74 C0.12,0.78 0.01,0.70 0.02,0.55 Z"/>
+      </clipPath>
+    </defs>
+  </svg>
+
+  <a class="back" href="index.html">← Back to Artists</a>
+
+  <header>
+    <figure class="portrait">
+      <img src="../assets/artists/danica/thumb.jpg" alt="Danica — portrait" width="1200" height="750">
+    </figure>
+    <div>
+      <h1>Danica</h1>
+      <div class="meta">Mixed Media • Dallas • @danica.art</div>
+      <p class="bio">Danica creates vibrant mixed media pieces that blend traditional painting techniques with digital elements. Her work explores themes of urban life and human connection, bringing a fresh perspective to contemporary art. She's excited to showcase her latest series at Chocolate & Art Dallas.</p>
+    </div>
+  </header>
+
+  <div class="nav" aria-hidden="true">
+    <button type="button" id="prevBtn">◀︎ Prev</button>
+    <button type="button" id="nextBtn">Next ▶︎</button>
+  </div>
+
+  <section aria-label="Artwork by Danica" class="carousel">
+    <figure class="slide">
+      <img src="../assets/artists/danica/work-1.jpg" alt="Urban Connections by Danica" width="1600" height="1066" loading="lazy">
+      <figcaption>Urban Connections — Mixed media on canvas, 2024.</figcaption>
+    </figure>
+    <figure class="slide">
+      <img src="../assets/artists/danica/work-2.jpg" alt="Digital Dreams by Danica" width="1600" height="1066" loading="lazy">
+      <figcaption>Digital Dreams — Acrylic and digital composite, 2024.</figcaption>
+    </figure>
+    <figure class="slide">
+      <img src="../assets/artists/danica/work-3.jpg" alt="City Pulse by Danica" width="1600" height="1066" loading="lazy">
+      <figcaption>City Pulse — Mixed media installation, 2024.</figcaption>
+    </figure>
+  </section>
+</div>
+
+<script>
+// Carousel navigation
+document.addEventListener('DOMContentLoaded', function() {
+  const carousel = document.querySelector('.carousel');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  
+  if (prevBtn && nextBtn && carousel) {
+    prevBtn.addEventListener('click', function() {
+      carousel.scrollBy({left: -500, behavior: 'smooth'});
+    });
+    
+    nextBtn.addEventListener('click', function() {
+      carousel.scrollBy({left: 500, behavior: 'smooth'});
+    });
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,331 @@
+/* Tickets Page Styles */
+
+/* Tickets Hero */
+.tickets-hero {
+  text-align: center;
+  padding: 4rem 0;
+  background: var(--bg);
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--muted);
+  margin: 1rem 0 2rem;
+  font-weight: 600;
+}
+
+/* CTA Box */
+.cta-box {
+  --c1: #7f5af0;
+  --c2: #2cb67d;
+  --bg: #0b0b0d;
+  display: grid;
+  gap: 0.25rem;
+  justify-items: center;
+  text-align: center;
+  padding: 1rem 1.25rem;
+  border-radius: 14px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 800;
+  background: linear-gradient(#ffffff10, #ffffff10) padding-box,
+              conic-gradient(from var(--ang, 0deg), var(--c1), var(--c2), var(--c1)) border-box;
+  border: 2px solid transparent;
+  transition: --ang 0.3s ease;
+  margin: 2rem auto;
+  max-width: 300px;
+}
+
+.cta-box:hover {
+  --ang: 180deg;
+  text-decoration: none;
+}
+
+.cta-title {
+  font-size: clamp(1.2rem, 4.2vw, 2rem);
+  letter-spacing: 0.02em;
+}
+
+.cta-sub {
+  font-weight: 600;
+  opacity: 0.85;
+  font-size: 0.95rem;
+}
+
+/* Night Selector */
+.night-select {
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.night-select h2 {
+  margin-bottom: 2rem;
+  color: var(--fg);
+}
+
+.night-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.night {
+  appearance: none;
+  border: 1px solid #ffffff33;
+  background: #121419;
+  color: #eaf0ff;
+  border-radius: 12px;
+  padding: 0.85rem 1.1rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  font-size: 1rem;
+}
+
+.night:hover {
+  background: #1a1f26;
+}
+
+.night:focus-visible {
+  outline: 3px solid #fff3;
+}
+
+.night .tag {
+  margin-left: 0.6rem;
+  font-size: 0.75em;
+  background: #ffd24a;
+  color: #1a1200;
+  padding: 0.2rem 0.45rem;
+  border-radius: 0.6rem;
+  font-weight: 900;
+}
+
+.night[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Event Details */
+.event-details {
+  padding: 3rem 0;
+}
+
+.event-details h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--fg);
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.detail-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-bd);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.detail-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--fg);
+}
+
+.detail-card p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.detail-card a {
+  color: #a0c2ff;
+  text-decoration: none;
+}
+
+.detail-card a:hover {
+  text-decoration: underline;
+}
+
+/* iMessage-Style FOMO Chat */
+.imessage {
+  max-width: 680px;
+  margin: 3rem auto;
+  padding: 12px 16px;
+  font: 500 16px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+}
+
+.imessage p {
+  max-width: 80%;
+  padding: 10px 14px;
+  border-radius: 18px;
+  margin: 8px 0;
+  display: inline-block;
+  position: relative;
+}
+
+.imessage .from {
+  background: #e5e5ea;
+  color: #000;
+}
+
+.imessage .to {
+  background: #0b93f6;
+  color: #fff;
+  margin-left: auto;
+  display: block;
+}
+
+.imessage .from::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  bottom: 0;
+  width: 12px;
+  height: 12px;
+  background: #e5e5ea;
+  border-bottom-right-radius: 12px;
+}
+
+.imessage .to::after {
+  content: "";
+  position: absolute;
+  right: -6px;
+  bottom: 0;
+  width: 12px;
+  height: 12px;
+  background: #0b93f6;
+  border-bottom-left-radius: 12px;
+}
+
+.imessage a {
+  color: #fff;
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+/* Embossed Plaque Notice */
+.notice {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.plaque {
+  --b1: #dcdcdc;
+  --b2: #8f8f8f;
+  background: #7d7d7d;
+  color: #fff;
+  padding: 0.6em 0.9em;
+  border-radius: 10px;
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(1.4rem, 4.8vw, 2.6rem);
+  border: 8px solid var(--b1);
+  box-shadow: inset 0 0 0 8px var(--b2);
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.notice p {
+  color: var(--muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Mini Apply CTA */
+.apply-mini {
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.apply-mini h3 {
+  margin-bottom: 2rem;
+  color: var(--fg);
+}
+
+.mini-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.apply-mini .mini {
+  padding: 0.5rem 0.7rem;
+  border: 1px solid #ffffff33;
+  border-radius: 10px;
+  color: #e8eefc;
+  text-decoration: none;
+  font-weight: 700;
+  background: #121419;
+  transition: background 0.2s ease;
+}
+
+.apply-mini .mini:hover {
+  background: #1a1f26;
+  text-decoration: none;
+}
+
+.apply-mini .mini:focus-visible {
+  outline: 3px solid #fff3;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .cta-box {
+    background: linear-gradient(#ffffff10, #ffffff10) padding-box, #6b6b6b33 border-box;
+  }
+  
+  .night {
+    transition: none;
+  }
+  
+  .apply-mini .mini {
+    transition: none;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .tickets-hero {
+    padding: 2rem 0;
+  }
+  
+  .night-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .night {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .details-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .detail-card {
+    padding: 1.5rem;
+  }
+  
+  .imessage {
+    padding: 8px 12px;
+  }
+  
+  .mini-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .apply-mini .mini {
+    width: 100%;
+    max-width: 200px;
+  }
+}

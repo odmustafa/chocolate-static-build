@@ -1,0 +1,258 @@
+/* Artists Page Styles */
+
+/* Artists Header with Trippy Refresh Background */
+.artists-hero {
+  position: relative;
+  min-height: 48vh;
+  border-radius: 20px;
+  overflow: hidden;
+  display: grid;
+  place-items: end start;
+  padding: 2.5rem;
+  margin: 2rem 0;
+  
+  /* Dark overlay + animated-looking conic gradient seeded by CSS vars */
+  background:
+    linear-gradient(rgba(0,0,0,.92), rgba(0,0,0,.92)),
+    conic-gradient(from var(--a, 0deg), hsl(var(--h, 210) 90% 55%), hsl(calc(var(--h, 210) + 120) 90% 55%), hsl(calc(var(--h, 210) + 240) 90% 55%), hsl(var(--h, 210) 90% 55%));
+}
+
+/* Add subtle noise for texture */
+.artists-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.25;
+  mix-blend-mode: overlay;
+  background: 
+    radial-gradient(1px 1px at 20% 10%, rgba(255,255,255,.05), transparent 40%),
+    radial-gradient(1px 2px at 80% 30%, rgba(255,255,255,.04), transparent 45%);
+}
+
+.artists-hero h1 {
+  margin: 0;
+  font-weight: 900;
+  font-size: clamp(2rem, 6vw, 4rem);
+  color: #fff;
+  position: relative;
+  z-index: 2;
+}
+
+/* Apply CTA Section */
+.apply-cta {
+  --bd: #ffffff22;
+  --fg: #e9edf3;
+  background: #0e0f12;
+  border: 1px solid var(--bd);
+  border-radius: 18px;
+  padding: 20px;
+  margin: 2rem 0;
+}
+
+.apply-cta h2 {
+  margin: 0.1rem 0 0.35rem;
+  font-size: clamp(1.1rem, 3.2vw, 1.6rem);
+  color: var(--fg);
+}
+
+.apply-cta p {
+  margin: 0 0 0.8rem;
+  color: #b8c0cc;
+}
+
+.apply-cta .btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.apply-cta .btn {
+  display: inline-block;
+  padding: 0.7rem 1rem;
+  border-radius: 12px;
+  background: #1d66ff;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 800;
+  transition: background 0.2s ease;
+}
+
+.apply-cta .btn:hover {
+  background: #0052e6;
+  text-decoration: none;
+}
+
+.apply-cta .btn:focus-visible {
+  outline: 3px solid #fff3;
+}
+
+/* Artist Preview Grid */
+.artist-preview {
+  --card-bg: #101113;
+  --card-bd: #ffffff1a;
+  --name: #f2f2f2;
+  margin: 3rem 0;
+}
+
+.artist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Artist Card */
+.artist-link {
+  display: grid;
+  gap: 0.55rem;
+  text-decoration: none;
+  color: var(--name);
+  outline: 0;
+}
+
+.artist-link:focus-visible {
+  box-shadow: 0 0 0 3px #fff3;
+  border-radius: 14px;
+}
+
+.media {
+  background: linear-gradient(#15161a, #15161a) padding-box;
+  border: 1px solid var(--card-bd);
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+}
+
+.media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(0.98);
+}
+
+/* Organic masks mapped to the SVG clipPaths */
+.blob-1 { clip-path: url(#blob-1); }
+.blob-2 { clip-path: url(#blob-2); }
+.blob-3 { clip-path: url(#blob-3); }
+.blob-4 { clip-path: url(#blob-4); }
+.blob-5 { clip-path: url(#blob-5); }
+
+/* Motion & hover */
+.artist-card {
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.artist-card:hover {
+  transform: translateY(-4px);
+}
+
+.name {
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* Kusama Playground Teaser */
+.kusama-card {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border: 1px dashed #ffffff33;
+  border-radius: 14px;
+  color: #e8eefc;
+  text-decoration: none;
+  margin: 3rem 0;
+  transition: background 0.2s ease;
+}
+
+.kusama-card:hover {
+  background: #ffffff08;
+  text-decoration: none;
+}
+
+.kusama-card figure {
+  margin: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.kusama-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.kusama-card span {
+  font-weight: 800;
+}
+
+/* Fallback when clip-path unsupported */
+@supports not (clip-path: url(#blob-1)) {
+  .media {
+    clip-path: none;
+    border-radius: 18px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .artist-card {
+    transition: none;
+  }
+  
+  .artist-card:hover {
+    transform: none;
+  }
+  
+  .artists-hero {
+    background: linear-gradient(rgba(0,0,0,.94), rgba(0,0,0,.94)), #0b0b0d;
+  }
+  
+  .kusama-card {
+    transition: none;
+  }
+}
+
+/* Mobile density */
+@media (max-width: 480px) {
+  .artist-grid {
+    gap: 18px;
+  }
+  
+  .apply-cta .btn {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+  
+  .kusama-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+/* Tablet adjustments */
+@media (max-width: 768px) {
+  .artists-hero {
+    min-height: 40vh;
+    padding: 2rem;
+  }
+  
+  .artist-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+}
+
+/* Large screen optimizations */
+@media (min-width: 1200px) {
+  .artist-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
