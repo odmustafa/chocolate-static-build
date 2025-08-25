@@ -165,6 +165,5 @@ For questions about the website implementation:
 
 ---
 
-**Built with ❤️ for the Dallas art community**
+**Built by elgAtoAi**
 
-*This website represents a complete implementation of the Chocolate & Art Show specifications, ready for production deployment.*
