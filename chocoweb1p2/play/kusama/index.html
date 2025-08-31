@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Kusama Playground — Chocolate & Art</title>
+  <meta name="description" content="Interactive Kusama-inspired dot playground. Click and move your mouse to create colorful dots in the style of Yayoi Kusama.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../../assets/images/choco-logo.png">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Kusama Playground — Chocolate & Art">
+  <meta property="og:description" content="Interactive Kusama-inspired dot playground. Create colorful dots and patterns.">
+  <meta property="og:image" content="/assets/play/kusama-thumb.jpg">
+  
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #0b0c10;
+      color: #e9eef7;
+      font: 16px/1.5 system-ui, -apple-system, sans-serif;
+      overflow: hidden;
+    }
+    
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: crosshair;
+    }
+    
+    .controls {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 1rem;
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+    }
+    
+    .controls h1 {
+      margin: 0 0 1rem 0;
+      font-size: 1.5rem;
+      color: #fff;
+    }
+    
+    .controls p {
+      margin: 0 0 1rem 0;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+    
+    .controls button {
+      background: #1d66ff;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-right: 0.5rem;
+      font-weight: 600;
+    }
+    
+    .controls button:hover {
+      background: #0052e6;
+    }
+    
+    .controls button:focus-visible {
+      outline: 3px solid #fff3;
+    }
+    
+    .back-link {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+      backdrop-filter: blur(10px);
+    }
+    
+    .back-link:hover {
+      background: rgba(0, 0, 0, 0.9);
+      text-decoration: none;
+    }
+    
+    .back-link:focus-visible {
+      outline: 3px solid #fff3;
+    }
+    
+    .reduced-motion-notice {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      background: rgba(255, 193, 7, 0.9);
+      color: #000;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      .controls {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        top: auto;
+      }
+      
+      .controls h1 {
+        font-size: 1.25rem;
+      }
+      
+      .controls p {
+        font-size: 0.8rem;
+      }
+      
+      .back-link {
+        top: 10px;
+        right: 10px;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+      }
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+      .reduced-motion-notice {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="k" aria-label="Interactive dot canvas"></canvas>
+  
+  <div class="controls">
+    <h1>Kusama Playground</h1>
+    <p>Click and drag to create colorful dots. Press space to clear.</p>
+    <button id="clearBtn">Clear Canvas</button>
+    <button id="pauseBtn">Pause</button>
+  </div>
+  
+  <a href="../../artists/index.html" class="back-link">← Back to Artists</a>
+  
+  <div class="reduced-motion-notice">
+    Animation is paused due to your reduced motion preference. You can still create dots by clicking!
+  </div>
+
+  <script>
+    (function() {
+      'use strict';
+      
+      const canvas = document.getElementById('k');
+      const ctx = canvas.getContext('2d');
+      const clearBtn = document.getElementById('clearBtn');
+      const pauseBtn = document.getElementById('pauseBtn');
+      
+      let dots = [];
+      let isAnimating = true;
+      let isMouseDown = false;
+      let animationId;
+      
+      // Check for reduced motion preference
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        isAnimating = false;
+        pauseBtn.textContent = 'Play';
+      }
+      
+      // Resize canvas
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      
+      // Initialize
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+      
+      // Dot class
+      class Dot {
+        constructor(x, y, interactive = false) {
+          this.x = x;
+          this.y = y;
+          this.radius = interactive ? Math.random() * 8 + 4 : Math.random() * 5 + 2;
+          this.dx = (Math.random() - 0.5) * (interactive ? 1 : 0.6);
+          this.dy = (Math.random() - 0.5) * (interactive ? 1 : 0.6);
+          this.hue = Math.random() * 360;
+          this.saturation = 80 + Math.random() * 20;
+          this.lightness = 50 + Math.random() * 30;
+          this.alpha = 0.8 + Math.random() * 0.2;
+          this.life = 1;
+          this.decay = interactive ? 0.002 : 0.005;
+          this.interactive = interactive;
+        }
+        
+        update() {
+          if (!isAnimating && !this.interactive) return;
+          
+          this.x += this.dx;
+          this.y += this.dy;
+          
+          // Bounce off edges
+          if (this.x < this.radius || this.x > canvas.width - this.radius) {
+            this.dx *= -0.8;
+            this.x = Math.max(this.radius, Math.min(canvas.width - this.radius, this.x));
+          }
+          if (this.y < this.radius || this.y > canvas.height - this.radius) {
+            this.dy *= -0.8;
+            this.y = Math.max(this.radius, Math.min(canvas.height - this.radius, this.y));
+          }
+          
+          // Fade out
+          this.life -= this.decay;
+          this.alpha = this.life * 0.8;
+          
+          // Slight color shift
+          this.hue += 0.5;
+        }
+        
+        draw() {
+          if (this.life <= 0) return;
+          
+          ctx.save();
+          ctx.globalAlpha = this.alpha;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `hsl(${this.hue}, ${this.saturation}%, ${this.lightness}%)`;
+          ctx.fill();
+          
+          // Add a subtle glow
+          ctx.shadowColor = `hsl(${this.hue}, ${this.saturation}%, ${this.lightness}%)`;
+          ctx.shadowBlur = this.radius * 2;
+          ctx.fill();
+          
+          ctx.restore();
+        }
+        
+        isDead() {
+          return this.life <= 0;
+        }
+      }
+      
+      // Create initial dots
+      function createInitialDots() {
+        if (prefersReducedMotion) return;
+        
+        for (let i = 0; i < 50; i++) {
+          dots.push(new Dot(
+            Math.random() * canvas.width,
+            Math.random() * canvas.height
+          ));
+        }
+      }
+      
+      // Add dot at position
+      function addDot(x, y, interactive = false) {
+        dots.push(new Dot(x, y, interactive));
+        
+        // Limit total dots for performance
+        if (dots.length > 500) {
+          dots = dots.slice(-400);
+        }
+      }
+      
+      // Mouse/touch events
+      function getEventPos(e) {
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+        const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+        return {
+          x: clientX - rect.left,
+          y: clientY - rect.top
+        };
+      }
+      
+      canvas.addEventListener('mousedown', (e) => {
+        isMouseDown = true;
+        const pos = getEventPos(e);
+        addDot(pos.x, pos.y, true);
+      });
+      
+      canvas.addEventListener('mousemove', (e) => {
+        if (isMouseDown) {
+          const pos = getEventPos(e);
+          addDot(pos.x, pos.y, true);
+        }
+      });
+      
+      canvas.addEventListener('mouseup', () => {
+        isMouseDown = false;
+      });
+      
+      canvas.addEventListener('click', (e) => {
+        if (!isMouseDown) {
+          const pos = getEventPos(e);
+          // Create a burst of dots
+          for (let i = 0; i < 5; i++) {
+            addDot(
+              pos.x + (Math.random() - 0.5) * 20,
+              pos.y + (Math.random() - 0.5) * 20,
+              true
+            );
+          }
+        }
+      });
+      
+      // Touch events
+      canvas.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        isMouseDown = true;
+        const pos = getEventPos(e);
+        addDot(pos.x, pos.y, true);
+      });
+      
+      canvas.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        if (isMouseDown) {
+          const pos = getEventPos(e);
+          addDot(pos.x, pos.y, true);
+        }
+      });
+      
+      canvas.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        isMouseDown = false;
+      });
+      
+      // Keyboard controls
+      document.addEventListener('keydown', (e) => {
+        switch (e.key) {
+          case ' ':
+          case 'Escape':
+            e.preventDefault();
+            clearCanvas();
+            break;
+          case 'p':
+          case 'P':
+            e.preventDefault();
+            toggleAnimation();
+            break;
+        }
+      });
+      
+      // Button controls
+      clearBtn.addEventListener('click', clearCanvas);
+      pauseBtn.addEventListener('click', toggleAnimation);
+      
+      function clearCanvas() {
+        dots = [];
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+      
+      function toggleAnimation() {
+        isAnimating = !isAnimating;
+        pauseBtn.textContent = isAnimating ? 'Pause' : 'Play';
+        
+        if (isAnimating && !animationId) {
+          animate();
+        }
+      }
+      
+      // Animation loop
+      function animate() {
+        if (!isAnimating) {
+          animationId = null;
+          return;
+        }
+        
+        // Clear with slight trail effect
+        ctx.fillStyle = 'rgba(11, 12, 16, 0.1)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Update and draw dots
+        dots = dots.filter(dot => {
+          dot.update();
+          dot.draw();
+          return !dot.isDead();
+        });
+        
+        // Occasionally add new ambient dots
+        if (Math.random() < 0.02 && dots.length < 200) {
+          addDot(
+            Math.random() * canvas.width,
+            Math.random() * canvas.height
+          );
+        }
+        
+        animationId = requestAnimationFrame(animate);
+      }
+      
+      // Start
+      createInitialDots();
+      if (isAnimating) {
+        animate();
+      }
+      
+      // Handle visibility changes
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          isAnimating = false;
+          if (animationId) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+          }
+        } else if (!prefersReducedMotion) {
+          isAnimating = true;
+          animate();
+        }
+      });
+      
+    })();
+  </script>
+</body>
+</html>

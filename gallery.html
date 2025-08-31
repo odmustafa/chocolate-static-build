@@ -1,38 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gallery — Chocolate & Art Show Dallas | September 18-19, 2025</title>
-  <meta name="description" content="Explore the gallery from Chocolate & Art Show Dallas. See live art creation, body art, music performances, and artisan chocolate experiences.">
-  
+  <meta name="description"
+    content="Explore the gallery from Chocolate & Art Show Dallas. See live art creation, body art, music performances, and artisan chocolate experiences.">
+
   <!-- Preconnect to external domains -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  
+
   <!-- Font loading -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  
+
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/images/choco-logo.png">
-  
+
   <!-- Open Graph / Social Media -->
   <meta property="og:title" content="Gallery — Chocolate & Art Show Dallas">
-  <meta property="og:description" content="Explore the gallery from Chocolate & Art Show Dallas. See live art creation, body art, music performances, and more.">
+  <meta property="og:description"
+    content="Explore the gallery from Chocolate & Art Show Dallas. See live art creation, body art, music performances, and more.">
   <meta property="og:image" content="/assets/gallery/Live%20Art%20Creation-1.jpg">
   <meta property="og:url" content="https://chocolateandartshow.com/gallery.html">
-  
+
   <!-- Canonical URL -->
   <link rel="canonical" href="https://chocolateandartshow.com/gallery.html">
-  
+  <!-- Tailwind CDN-->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <!-- Styles -->
   <link rel="stylesheet" href="assets/css/global.css">
   <link rel="stylesheet" href="assets/css/components.css">
   <link rel="stylesheet" href="assets/css/gallery.css">
 </head>
+
 <body>
   <!-- Skip to main content for accessibility -->
   <a href="#main-content" class="sr-only">Skip to main content</a>
-  
+
   <!-- Navigation -->
   <nav class="nav" role="navigation" aria-label="Main navigation">
     <div class="nav-container">
@@ -40,7 +45,7 @@
         <img src="assets/images/choco-logo.png" alt="Chocolate & Art Show logo" width="40" height="40">
         <span>Chocolate & Art</span>
       </a>
-      
+
       <ul class="nav-menu" role="menubar">
         <li role="none">
           <a href="index.html" role="menuitem">Home</a>
@@ -70,20 +75,37 @@
   <!-- Main Content -->
   <main id="main-content">
     <div class="container">
-      <!-- Gallery Header -->
-      <section class="gallery-header">
-        <h1>Gallery</h1>
-        <p>Experience the magic of Chocolate & Art Show through these moments captured from our events. From live art creation to immersive experiences, see what makes our shows unforgettable.</p>
-      </section>
+      <div
+        class="flex mt-8 justify-center gap-x-4 rounded-xl bg-white p-6 shadow-lg outline outline-white/5 dark:bg-stone-600 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
+        <div>
+          <img class="size-8 mr-1" src="assets/images/hi/tool.svg" alt="wrench-screwdriver heroicons" />
+        </div>
+        <div class="text-2xl font-semibold text-black dark:text-white uppercase">
+          Under Construction
+        </div>
+        <div>
+          <img class="size-8 ml-1" src="assets/images/hi/tool.svg" alt="wrench-screwdriver heroicons" />
+        </div>
+      </div>
+    </div>
+    <!-- Gallery Header -->
+    <section class="gallery-header">
+      <h1>Gallery</h1>
+      <p>Experience the magic of Chocolate & Art Show through these moments captured from our events. From live art
+        creation to immersive experiences, see what makes our shows unforgettable.</p>
+    </section>
 
-      <!-- Gallery Grid -->
-      <section class="gallery-main" aria-label="Event gallery">
-        <div class="gallery-masonry">
+    <!-- Gallery Grid -->
+    <section class="gallery-main" aria-label="Event gallery">
+
+
+
+      <!-- <div class="gallery-masonry">
           <figure class="gallery-item" data-category="art">
-            <img src="assets/gallery/Live%20Art%20Creation-1.jpg" 
-                 alt="Artist creating live artwork at Chocolate & Art Show" 
-                 loading="lazy" 
-                 width="800" 
+            <img src="assets/gallery/Live%20Art%20Creation-1.jpg"
+                 alt="Artist creating live artwork at Chocolate & Art Show"
+                 loading="lazy"
+                 width="800"
                  height="600">
             <figcaption>
               <h3>Live Art Creation</h3>
@@ -95,10 +117,10 @@
           </figure>
 
           <figure class="gallery-item" data-category="performance">
-            <img src="assets/gallery/Body%20Art-1.jpg" 
-                 alt="Body art performance at Chocolate & Art Show" 
-                 loading="lazy" 
-                 width="800" 
+            <img src="assets/gallery/Body%20Art-1.jpg"
+                 alt="Body art performance at Chocolate & Art Show"
+                 loading="lazy"
+                 width="800"
                  height="600">
             <figcaption>
               <h3>Body Art Performance</h3>
@@ -110,10 +132,10 @@
           </figure>
 
           <figure class="gallery-item" data-category="music">
-            <img src="assets/gallery/Live%20Music-1.jpg" 
-                 alt="Live music performance at Chocolate & Art Show" 
-                 loading="lazy" 
-                 width="800" 
+            <img src="assets/gallery/Live%20Music-1.jpg"
+                 alt="Live music performance at Chocolate & Art Show"
+                 loading="lazy"
+                 width="800"
                  height="600">
             <figcaption>
               <h3>Live Music</h3>
@@ -125,10 +147,10 @@
           </figure>
 
           <figure class="gallery-item" data-category="chocolate">
-            <img src="assets/gallery/Artisan%20Chocolate-1.jpg" 
-                 alt="Artisan chocolate display at Chocolate & Art Show" 
-                 loading="lazy" 
-                 width="800" 
+            <img src="assets/gallery/Artisan%20Chocolate-1.jpg"
+                 alt="Artisan chocolate display at Chocolate & Art Show"
+                 loading="lazy"
+                 width="800"
                  height="600">
             <figcaption>
               <h3>Artisan Chocolate</h3>
@@ -140,10 +162,10 @@
           </figure>
 
           <figure class="gallery-item" data-category="interactive">
-            <img src="assets/gallery/Interactive%20Experience-1.jpg" 
-                 alt="Interactive art experience at Chocolate & Art Show" 
-                 loading="lazy" 
-                 width="800" 
+            <img src="assets/gallery/Interactive%20Experience-1.jpg"
+                 alt="Interactive art experience at Chocolate & Art Show"
+                 loading="lazy"
+                 width="800"
                  height="600">
             <figcaption>
               <h3>Interactive Experience</h3>
@@ -155,10 +177,10 @@
           </figure>
 
           <figure class="gallery-item" data-category="atmosphere">
-            <img src="assets/gallery/Night%20Atmosphere-1.jpg" 
-                 alt="Night atmosphere at Chocolate & Art Show" 
-                 loading="lazy" 
-                 width="800" 
+            <img src="assets/gallery/Night%20Atmosphere-1.jpg"
+                 alt="Night atmosphere at Chocolate & Art Show"
+                 loading="lazy"
+                 width="800"
                  height="600">
             <figcaption>
               <h3>Night Atmosphere</h3>
@@ -168,20 +190,23 @@
               <span class="sr-only">View Night Atmosphere in full size</span>
             </button>
           </figure>
-        </div>
-      </section>
+        </div> -->
+    </section>
 
-      <!-- CTA Section -->
-      <section class="gallery-cta">
-        <h2>Ready to Experience It Yourself?</h2>
-        <p>Join us for two unforgettable nights of art, music, and chocolate in Dallas.</p>
-        <a href="tickets.html" class="btn btn-primary">Get Your Tickets</a>
-      </section>
+    <!-- CTA Section -->
+    <section class="gallery-cta">
+      <h2>Ready to Experience It Yourself?</h2>
+      <p>Join us for two unforgettable nights of art, music, and all-you-can-eat chocolate fondue in Dallas.</p>
+      <a href="tickets.html"
+        class="btn bg-white p-6 shadow-lg outline outline-white/5 dark:bg-stone-600 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">Get
+        Your Tickets</a>
+    </section>
     </div>
   </main>
 
   <!-- Lightbox Modal -->
-  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true"
+    aria-labelledby="lightbox-title">
     <div class="lightbox-overlay" aria-label="Close lightbox"></div>
     <div class="lightbox-content">
       <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
@@ -197,4 +222,5 @@
   <script src="assets/js/global.js"></script>
   <script src="assets/js/gallery.js"></script>
 </body>
+
 </html>
